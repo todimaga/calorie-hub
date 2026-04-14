@@ -347,8 +347,8 @@
 
     /* Charts row */
     .charts-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 12px;
       margin-bottom: 20px;
     }
@@ -954,8 +954,11 @@
     }
 
     // ── Date helpers ──────────────────────────────────────────────
-    function toKey(d) { // d = Date object → 'YYYY-MM-DD'
-      return d.toISOString().slice(0, 10);
+    function toKey(d) { // d = Date object → 'YYYY-MM-DD' (local time)
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
     }
     function todayKey() { return toKey(new Date()); }
 
